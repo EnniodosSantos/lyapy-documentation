@@ -48,9 +48,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-of-functions">List of Functions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-methods">List of Methods</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#available-maps">Available Maps</a>
+    <li class="toctree-l3"><a class="reference internal" href="#chaoticmap-initialization">ChaoticMap Initialization</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#inicial-condition-generator">Inicial Condition Generator</a>
     </li>
@@ -72,19 +72,15 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#ulam-map">Ulam Map</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tent-map">Tent Map</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#gauss-map">Gauss Map</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#bernoulli-map">Bernoulli Map</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tent-map_1">Tent Map</a>
+    <li class="toctree-l3"><a class="reference internal" href="#tent-map">Tent Map</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#asymmetric-tent-map">Asymmetric Tent Map</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#chebyshev-map">Chebyshev Map</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#cusp-map">Cusp Map</a>
     </li>
         </ul>
     </li>
@@ -121,15 +117,52 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="about-lyappy">About Lyappy</h1>
-<p><code>lyappy</code> is a pure Python library for the generation and analysis of synthetic chaotic time series derived from discrete dynamical systems with exact Lyapunov exponents and analytically known invariant measures. - Tentei aqui</p>
+<p><code>lyappy</code> is a pure Python library for the generation and analysis of synthetic chaotic time series derived from discrete dynamical systems with exact Lyapunov exponents and analytically known invariant measures.</p>
 <h2 id="installing">Installing</h2>
-<p>Exchaos can be installed via the command line using</p>
+<p>Lyappy can be installed via the command line using:</p>
 <ul>
 <li><code>pip install lyappy</code></li>
 </ul>
 <h2 id="basic-usage">Basic Usage</h2>
-<h2 id="list-of-functions">List of Functions</h2>
-<h4 id="available-maps">Available Maps</h4>
+<pre><code class="language-python">from lyappy import LogisticMap
+
+# Initialize the map with steps and transient
+map_obj = LogisticMap(steps=1000, trans=100)
+
+# Get a complete summary
+summary = map_obj.lyapunov_summary()
+print(f&quot;Estimated Lambda: {summary['estimated']}&quot;)
+
+# Generate plots
+map_obj.time_series(plot=True)
+map_obj.lyapunov_convergence(plot=True)
+
+</code></pre>
+<h2 id="list-of-methods">List of Methods</h2>
+<h4 id="chaoticmap-initialization">ChaoticMap Initialization</h4>
+<div class="func-header">
+    <b>ChaoticMap</b><span>(steps, trans, x0=None, prec=50, seed=None)</span>
+</div>
+
+<p>Base class constructor for all chaotic maps.</p>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd>
+<p><strong>steps</strong> (int): Number of iterations used to compute the map evolution and Lyapunov average.</p>
+</dd>
+<dd>
+<p><strong>trans</strong> (int): Number of transient iterations to be discarded.</p>
+</dd>
+<dd>
+<p><strong>x0</strong> (float/Decimal, optional): Initial condition. If None, it is sampled from the map's domain.</p>
+</dd>
+<dd>
+<p><strong>prec</strong> (int): Decimal precision for calculations (default: 50).</p>
+</dd>
+<dd>
+<p><strong>seed</strong> (int, optional): Seed for the random number generator.</p>
+</dd>
+</dl>
 <div class="func-header">
     <b>available_maps</b><span>()</span>
 </div>
@@ -327,30 +360,32 @@ array([0.90973773, 0.41082964, 0.69907782, 0.74430939..., 0.69323049])
 <p>To see the avaliable maps you can use the <code>available_maps()</code> method</p>
 <p>The following maps can be simulated with this package:</p>
 <h3 id="logistic-map">Logistic Map</h3>
-<p>Input string: <code>"Logistic"</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = rx_n(1 - x_n)\)</span></p>
+<p>Class: <code>LogisticMap</code></p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = 4x_n(1 - x_n)\)</span></p>
+<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
 <h3 id="ulam-map">Ulam Map</h3>
-<p>Input string: <code>"Ulam"</code></p>
-<p><span class="arithmatex">\(x_{n+1} = 1 - 2x_n^2\)</span></p>
-<h3 id="tent-map">Tent Map</h3>
-<p>Input string: <code>"Tent"</code></p>
+<p>Class: <code>UlamMap</code></p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = 1 - 2x_n^2\)</span></p>
+<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
 <h3 id="gauss-map">Gauss Map</h3>
-<p>Input string: <code>"Gauss"</code></p>
-<p><span class="arithmatex">\(x_{n+1} = \frac{1}{x_n} - \lfloor \frac{1}{x_n} \rfloor\)</span></p>
+<p>Class: <code>GaussMap</code></p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = \frac{1}{x_n} \pmod 1\)</span></p>
+<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \frac{\pi^2}{6 \ln(2)}\)</span></p>
 <h3 id="bernoulli-map">Bernoulli Map</h3>
-<p>Input string: <code>"Bernoulli"</code></p>
-<p><span class="arithmatex">\(x_{n+1} = 2x_n \pmod 1\)</span></p>
-<h3 id="tent-map_1">Tent Map</h3>
-<p>Input string: <code>"Tent"</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = \begin{cases} \mu x_n &amp; \text{for } x_n &lt; \frac{1}{2} \\ \mu (1 - x_n) &amp; \text{for } x_n \geq \frac{1}{2} \end{cases}\)</span></p>
+<p>Class: <code>BernoulliMap</code></p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = 2x_n \pmod 1\)</span></p>
+<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<h3 id="tent-map">Tent Map</h3>
+<p>Class: <code>TentMap</code></p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = 2 \min(x_n, 1 - x_n)\)</span></p>
+<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
 <h3 id="asymmetric-tent-map">Asymmetric Tent Map</h3>
-<p>Input string: <code>"Asymmetric Tent"</code></p>
+<p>Class: AsymetricMap</p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = x/a\)</span> if <span class="arithmatex">\(x &lt; a\)</span> else <span class="arithmatex">\((1-x)/(1-a)\)</span></p>
 <h3 id="chebyshev-map">Chebyshev Map</h3>
-<p>Input string: <code>"Chebyshev"</code></p>
-<p>Equation:  <span class="arithmatex">\(x_{n+1} = \cos(k \arccos(x_n))\)</span></p>
-<h3 id="cusp-map">Cusp Map</h3>
-<p>Input string: <code>"Cusp"</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = 1 - \sqrt{|1 - 2x_n|}\)</span></p>
+<p>Class: ChebyshevMap</p>
+<p>Equation: <span class="arithmatex">\(x_{n+1} = 2x_n^2 - 1\)</span></p>
+<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
 <h2 id="references">References</h2>
 <p>[^1]: [^1]: STROGATZ, Steven H. <strong>Nonlinear Dynamics and Chaos</strong>: With Applications to Physics, Biology, Chemistry, and Engineering. 2. ed. [S.l.]: CRC Press, 2014.</p>
               
@@ -404,5 +439,5 @@ array([0.90973773, 0.41082964, 0.69907782, 0.74430939..., 0.69323049])
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-11 03:25:13.508159+00:00
+Build Date UTC : 2026-02-16 03:30:35.289528+00:00
 -->
