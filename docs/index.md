@@ -146,7 +146,7 @@ array([0.88, 0.24, 0.48, 0.96, ... , 0.64, 0.72, 0.56])
 #### Lyapunov Estimated
 
 <div class="func-header">
-    <b>lyapunov_estimated</b><span>(map_name, x0, steps, trans, prec=50, dec=False)</span>
+    <b>lyapunov_estimated</b><span>(dec=False)</span>
 </div>
 
 Computes the estimated Lyapunov Exponent of a chaotic map.
@@ -261,7 +261,7 @@ Computes the theoretical Lyapunov Exponent of a chaotic map.
 
 In chaos theory, maps (also known as iterated maps, difference equations, or recursion relations) are dynamical systems in which time is discrete rather than continuous. [^1] The simulation of discrete maps is fundamental, as they serve as controlled environments for the study of chaotic systems, allowing the observation of complex phenomena through the evolution of discrete orbits rather than continuous flows.[^1]
 
-To see the avaliable maps you can use the `available_maps()` method
+To see the avaliable maps you can use the `lyappy.available_maps()` method
 
 The following maps can be simulated with this package:
 
