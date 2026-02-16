@@ -1,19 +1,52 @@
 # About Lyappy
 
-`lyappy` is a pure Python library for the generation and analysis of synthetic chaotic time series derived from discrete dynamical systems with exact Lyapunov exponents and analytically known invariant measures. - Tentei aqui
+`lyappy` is a pure Python library for the generation and analysis of synthetic chaotic time series derived from discrete dynamical systems with exact Lyapunov exponents and analytically known invariant measures.
 
 ## Installing
 
-Exchaos can be installed via the command line using
+Lyappy can be installed via the command line using:
 
 * `pip install lyappy`
 
-
 ## Basic Usage
 
-## List of Functions
+```python
+from lyappy import LogisticMap
 
-#### Available Maps
+# Initialize the map with steps and transient
+map_obj = LogisticMap(steps=1000, trans=100)
+
+# Get a complete summary
+summary = map_obj.lyapunov_summary()
+print(f"Estimated Lambda: {summary['estimated']}")
+
+# Generate plots
+map_obj.time_series(plot=True)
+map_obj.lyapunov_convergence(plot=True)
+
+```
+
+## List of Methods
+
+#### ChaoticMap Initialization
+
+<div class="func-header">
+    <b>ChaoticMap</b><span>(steps, trans, x0=None, prec=50, seed=None)</span>
+</div>
+
+Base class constructor for all chaotic maps.
+
+**Parameters:**
+
+:   **steps** (int): Number of iterations used to compute the map evolution and Lyapunov average.
+
+:   **trans** (int): Number of transient iterations to be discarded.
+
+:   **x0** (float/Decimal, optional): Initial condition. If None, it is sampled from the map's domain.
+
+:   **prec** (int): Decimal precision for calculations (default: 50).
+
+:   **seed** (int, optional): Seed for the random number generator.
 
 <div class="func-header">
     <b>available_maps</b><span>()</span>
@@ -234,53 +267,57 @@ The following maps can be simulated with this package:
 
 ### Logistic Map
 
-Input string: `"Logistic"`
+Class: `LogisticMap`
 
-Equation: $x_{n+1} = rx_n(1 - x_n)$
+Equation: $x_{n+1} = 4x_n(1 - x_n)$
+
+Theoretical Lyapunov Exponent: $\lambda = \ln(2)$
 
 ### Ulam Map
 
-Input string: `"Ulam"`
+Class: `UlamMap`
 
-$x_{n+1} = 1 - 2x_n^2$
+Equation: $x_{n+1} = 1 - 2x_n^2$
 
-### Tent Map
-
-Input string: `"Tent"`
+Theoretical Lyapunov Exponent: $\lambda = \ln(2)$
 
 ### Gauss Map
 
-Input string: `"Gauss"`
+Class: `GaussMap`
 
-$x_{n+1} = \frac{1}{x_n} - \lfloor \frac{1}{x_n} \rfloor$
+Equation: $x_{n+1} = \frac{1}{x_n} \pmod 1$
+
+Theoretical Lyapunov Exponent: $\lambda = \frac{\pi^2}{6 \ln(2)}$
 
 ### Bernoulli Map
 
-Input string: `"Bernoulli"`
+Class: `BernoulliMap`
 
-$x_{n+1} = 2x_n \pmod 1$
+Equation: $x_{n+1} = 2x_n \pmod 1$
+
+Theoretical Lyapunov Exponent: $\lambda = \ln(2)$
 
 ### Tent Map
 
-Input string: `"Tent"`
+Class: `TentMap`
 
-Equation: $x_{n+1} = \begin{cases} \mu x_n & \text{for } x_n < \frac{1}{2} \\ \mu (1 - x_n) & \text{for } x_n \geq \frac{1}{2} \end{cases}$
+Equation: $x_{n+1} = 2 \min(x_n, 1 - x_n)$
+
+Theoretical Lyapunov Exponent: $\lambda = \ln(2)$
 
 ### Asymmetric Tent Map
 
-Input string: `"Asymmetric Tent"`
+Class: AsymetricMap
+
+Equation: $x_{n+1} = x/a$ if $x < a$ else $(1-x)/(1-a)$
 
 ### Chebyshev Map
 
-Input string: `"Chebyshev"`
+Class: ChebyshevMap
 
-Equation:  $x_{n+1} = \cos(k \arccos(x_n))$
+Equation: $x_{n+1} = 2x_n^2 - 1$
 
-### Cusp Map
-
-Input string: `"Cusp"`
-
-Equation: $x_{n+1} = 1 - \sqrt{|1 - 2x_n|}$
+Theoretical Lyapunov Exponent: $\lambda = \ln(2)$
 
 ## References
 
