@@ -4,8 +4,8 @@ theme:
   name: readthedocs
 
 nav:
-  - Lyappy: index.md
-  - Lyappy (Português): pt/index.md
+  - Lyapy: index.md
+  - Lyapy (Português): pt/index.md
 
 markdown_extensions:
   - def_list
