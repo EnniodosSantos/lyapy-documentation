@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Lyappy (Português) - lyappy</title>
+    <title>Lyapy (Português) - lyapy</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -14,7 +14,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Lyappy (Portugu\u00eas)";
+        var mkdocs_page_name = "Lyapy (Portugu\u00eas)";
         var mkdocs_page_input_path = "pt/index.md";
         var mkdocs_page_url = null;
       </script>
@@ -32,7 +32,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> lyappy
+          <a href=".." class="icon icon-home"> lyapy
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -42,51 +42,53 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Lyappy</a>
+                <li class="toctree-l1"><a class="reference internal" href="..">Lyapy</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Lyappy (Português)</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Lyapy (Português)</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#instalacao">Instalação</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a>
+    <li class="toctree-l2"><a class="reference internal" href="#uso-basico">Uso Básico</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#lista-de-funcoes">Lista de Funções</a>
+    <li class="toctree-l2"><a class="reference internal" href="#inicializacao-da-classe">Inicialização da Classe</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#metodos">Métodos</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#map-time-series-serie-temporal-do-mapa">Map Time Series (Série Temporal do Mapa)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#serie-temporal">Série Temporal</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#lyapunov-estimated-lyapunov-estimado">Lyapunov Estimated (Lyapunov Estimado)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#expoente-de-lyapunov-estimado">Expoente de Lyapunov Estimado</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#lyapunov-convergence-convergencia-de-lyapunov">Lyapunov Convergence (Convergência de Lyapunov)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#convergencia-de-lyapunov">Convergência de Lyapunov</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#theoretical-lyapunov-lyapunov-teorico">Theoretical Lyapunov (Lyapunov Teórico)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#expoente-de-lyapunov-teorico">Expoente de Lyapunov Teórico</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#lyapunov-summary-resumo-de-lyapunov">Lyapunov Summary (Resumo de Lyapunov)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#resumo-de-lyapunov">Resumo de Lyapunov</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#lista-de-mapas">Lista de Mapas</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-logistico-logistic-map">Mapa Logístico (Logistic Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-logistico">Mapa Logístico</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-ulam-ulam-map">Mapa de Ulam (Ulam Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-ulam">Mapa de Ulam</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-tenda-tent-map">Mapa Tenda (Tent Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-gauss">Mapa de Gauss</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-gauss-gauss-map">Mapa de Gauss (Gauss Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-bernoulli">Mapa de Bernoulli</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-bernoulli-bernoulli-map">Mapa de Bernoulli (Bernoulli Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-tenda">Mapa Tenda</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-tenda-assimetrico-asymmetric-tent-map">Mapa Tenda Assimétrico (Asymmetric Tent Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-tenda-assimetrico">Mapa Tenda Assimétrico</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-chebyshev-chebyshev-map">Mapa de Chebyshev (Chebyshev Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-chebyshev">Mapa de Chebyshev</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-cuspide-cusp-map">Mapa de Cúspide (Cusp Map)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapa-de-bernoulli-generalizado">Mapa de Bernoulli Generalizado</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#referencias">Referencias</a>
+    <li class="toctree-l2"><a class="reference internal" href="#referencias">Referências</a>
     </li>
     </ul>
                 </li>
@@ -98,14 +100,14 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">lyappy</a>
+          <a href="..">lyapy</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Lyappy (Português)</li>
+      <li class="breadcrumb-item active">Lyapy (Português)</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -114,147 +116,323 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="sobre-o-lyapupy">Sobre o lyapupy</h1>
-<p><code>lyapupy</code> é uma biblioteca feita totalmente em Python voltada para a geração e análise de séries temporais caóticas sintéticas, derivadas de sistemas dinâmicos discretos com expoentes de Lyapunov exatos e medidas invariantes conhecidas analiticamente.</p>
+                <h1 id="sobre-o-lyapy">Sobre o Lyapy</h1>
+<p><code>lyapy</code> é uma biblioteca Python pura para geração e análise de séries temporais caóticas sintéticas derivadas de sistemas dinâmicos discretos, com expoentes de Lyapunov exatos e medidas invariantes analiticamente conhecidas.</p>
 <h2 id="instalacao">Instalação</h2>
-<p>O exchaos pode ser instalado via linha de comando utilizando:</p>
-<ul>
-<li><code>pip install exchaos</code></li>
-<li><code>pip install sinthchaos</code></li>
-<li><code>pip install chaosforge</code></li>
-<li><code>pip install ergodichaos</code></li>
-<li><code>pip install ergodic</code></li>
-</ul>
-<h2 id="basic-usage">Basic Usage</h2>
-<h2 id="lista-de-funcoes">Lista de Funções</h2>
-<h3 id="map-time-series-serie-temporal-do-mapa">Map Time Series (Série Temporal do Mapa)</h3>
+<p>O Lyapy pode ser instalado via linha de comando usando:</p>
+<pre><code>pip install lyapy
+</code></pre>
+<h2 id="uso-basico">Uso Básico</h2>
+<pre><code class="language-python">from lyapy import LogisticMap
+
+# Inicializa o mapa com número de iterações e transiente
+map_obj = LogisticMap(steps=1000, trans=100)
+
+# Obtém um resumo completo
+summary = map_obj.lyapunov_summary()
+print(f&quot;Lambda Estimado: {summary['estimated']}&quot;)
+
+# Gera gráficos
+map_obj.time_series(plot=True)
+map_obj.lyapunov_convergence(plot=True)
+</code></pre>
+<h2 id="inicializacao-da-classe">Inicialização da Classe</h2>
 <div class="func-header">
-    <b>map_time_series</b><span>(map_name, x0, steps, trans, prec=50, dec=False, plot=False)</span>
+    <b>ChaoticMap</b><span>(steps, trans, x0=None, prec=50, seed=None)</span>
 </div>
 
-<p>Computa a evolução de um mapa caótico.</p>
+<p>Classe base para todos os mapas caóticos. Todas as classes de mapa herdam de <code>ChaoticMap</code> e compartilham esta interface.</p>
 <dl>
 <dt><strong>Parâmetros:</strong></dt>
 <dd>
-<p><strong>map_name</strong> (<em>str</em>): Nome do mapa caótico. <a href="#lista-de-mapas">mapas disponíveis</a></p>
+<p><strong>steps</strong> (int): Número de iterações usadas para calcular a evolução do mapa e a média de Lyapunov.</p>
 </dd>
 <dd>
-<p><strong>x0</strong> (<em>float</em>): Condição inicial para as iterações.</p>
+<p><strong>trans</strong> (int): Número de iterações transientes a serem descartadas.</p>
 </dd>
 <dd>
-<p><strong>steps</strong> (<em>int</em>): Número de iterações usadas para computar a evolução do mapa.</p>
+<p><strong>x0</strong> (float/Decimal, opcional): Condição inicial. Se <code>None</code>, é amostrada aleatoriamente do domínio do mapa.</p>
 </dd>
 <dd>
-<p><strong>trans</strong> (<em>int</em>): Número de iterações transitórias a serem descartadas.</p>
+<p><strong>prec</strong> (int): Precisão decimal para os cálculos (padrão: <code>50</code>).</p>
 </dd>
 <dd>
-<p><strong>prec</strong> (<em>int</em>): Precisão decimal (padrão: 50).</p>
+<p><strong>seed</strong> (int, opcional): Semente para o gerador de números aleatórios.</p>
 </dd>
-<dd>
-<p><strong>dec</strong> (<em>bool</em>): Se deve retornar um objeto <code>Decimal</code> (se <code>True</code>) ou um <code>np.array</code> (se <code>False</code>, padrão).</p>
-</dd>
-<dd>
-<p><strong>plot</strong> (<em>bool</em>): Se deve exibir um gráfico da evolução da convergência (padrão: <code>False</code>).</p>
-</dd>
-<dt><strong>Retorno:</strong></dt>
-<dd><strong>values</strong> (<em>array ou Decimal</em>): Série temporal contendo a evolução do mapa caótico.</dd>
-<dt><strong>Tipo de retorno:</strong></dt>
-<dd>numpy.array ou decimal.Decimal</dd>
 </dl>
 <p><strong>Exemplos</strong></p>
-<pre><code class="language-python">&gt;&gt;&gt; map_time_series(&quot;Logistic&quot;, 0.69, 1000, 100)
-array([9.66107169e-01, 1.30976429e-01, 4.55286417e-01,...,2.03055676e-01])
-&gt;&gt;&gt;
-&gt;&gt;&gt; map_time_series(&quot;Ulam&quot;, 0.69, 1000, 100, dec=True)
-[Decimal('-0.6870338025456384356961511819355663023943768799766'),
- Decimal('0.05596910831936139542992034181417084026349458638572'),...,Decimal('0.11798100275668302052603852642095837137197711931708')]
-&gt;&gt;&gt;
-&gt;&gt;&gt; map_time_series(&quot;Tent&quot;, 0.69, 1000, 100, plot=True)
+<pre><code class="language-python">&gt;&gt;&gt; from lyapy import LogisticMap, TentMap
+&gt;&gt;&gt; m = LogisticMap(steps=1000, trans=100)
+&gt;&gt;&gt; m
+&lt;LogisticMap: x0=0.6931, steps=1000, trans=100&gt;
+
+&gt;&gt;&gt; m = TentMap(steps=500, trans=50, x0=0.69, seed=42)
+</code></pre>
+<hr />
+<div class="func-header">
+    <b>available_maps</b><span>()</span>
+</div>
+
+<p>Retorna a lista de mapas caóticos implementados no pacote.</p>
+<dl>
+<dt><strong>Retorno:</strong></dt>
+<dd>
+<p><strong>values</strong> (<em>list of str</em>): Nomes dos mapas caóticos disponíveis.</p>
+</dd>
+</dl>
+<p><strong>Exemplos</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; import lyapy
+&gt;&gt;&gt; lyapy.available_maps()
+['Gauss',
+ 'Logistic',
+ 'Bernoulli',
+ 'Ulam',
+ 'Tent',
+ 'Asymmetric Tent',
+ 'Chebyshev',
+ 'Generalized Bernoulli']
+</code></pre>
+<hr />
+<h2 id="metodos">Métodos</h2>
+<h4 id="serie-temporal">Série Temporal</h4>
+<div class="func-header">
+    <b>time_series</b><span>(dec=False, plot=False)</span>
+</div>
+
+<p>Calcula a evolução do mapa caótico após descartar o transiente.</p>
+<dl>
+<dt><strong>Parâmetros:</strong></dt>
+<dd>
+<p><strong>dec</strong> (<em>bool</em>): Se <code>True</code>, retorna uma lista de objetos <code>Decimal</code>; se <code>False</code> (padrão), retorna um <code>numpy.array</code>.</p>
+</dd>
+<dd>
+<p><strong>plot</strong> (<em>bool</em>): Se <code>True</code>, exibe um gráfico da série temporal (padrão: <code>False</code>).</p>
+</dd>
+<dt><strong>Retorno:</strong></dt>
+<dd>
+<p><strong>values</strong> (<em>numpy.array ou list of Decimal</em>): Série temporal da evolução do mapa caótico.</p>
+</dd>
+</dl>
+<p><strong>Exemplos</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100)
+&gt;&gt;&gt; m.time_series()
+array([0.88, 0.24, 0.48, 0.96, ..., 0.64, 0.72, 0.56])
+
+&gt;&gt;&gt; m.time_series(dec=True)
+[Decimal('0.88'), Decimal('0.24'), ...]
+
+&gt;&gt;&gt; m.time_series(plot=True)
+# exibe gráfico
 array([0.88, 0.24, 0.48, 0.96, ... , 0.64, 0.72, 0.56])
 </code></pre>
-<h3 id="lyapunov-estimated-lyapunov-estimado">Lyapunov Estimated (Lyapunov Estimado)</h3>
-<div class="func-header"> <b>lyapunov_estimated</b><span>(map_name, x0, steps, trans, prec=50, dec=False)</span> </div>
+<hr />
+<h4 id="expoente-de-lyapunov-estimado">Expoente de Lyapunov Estimado</h4>
+<div class="func-header">
+    <b>lyapunov_estimated</b><span>(dec=False)</span>
+</div>
 
-<p>Computa o Expoente de Lyapunov estimado de um mapa caótico.</p>
-<p>Parâmetros: : map_name (str): Nome do mapa caótico. : x0 (float): Condição inicial. : steps (int): Número de iterações usadas na média de Lyapunov. : trans (int): Número de iterações transitórias descartadas. : prec (int): Precisão decimal. : dec (bool): Se deve retornar um objeto Decimal (se True) ou um float (se False, padrão).</p>
-<p>Retorno: : values (float ou Decimal): O Expoente de Lyapunov estimado do mapa caótico.</p>
-<p>Tipo de retorno: : float ou decimal.Decimal</p>
-<p>Exemplos</p>
-<pre><code class="language-Python">&gt;&gt;&gt; lyapunov_estimated(&quot;Tent&quot;, 0.69, 1000, 100)
+<p>Calcula o Expoente de Lyapunov estimado do mapa caótico.</p>
+<dl>
+<dt><strong>Parâmetros:</strong></dt>
+<dd>
+<p><strong>dec</strong> (<em>bool</em>): Se <code>True</code>, retorna um objeto <code>Decimal</code>; se <code>False</code> (padrão), retorna um <code>float</code>.</p>
+</dd>
+<dt><strong>Retorno:</strong></dt>
+<dd>
+<p><strong>values</strong> (<em>float ou Decimal</em>): O Expoente de Lyapunov estimado.</p>
+</dd>
+</dl>
+<p><strong>Exemplos</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100, x0=0.69)
+&gt;&gt;&gt; m.lyapunov_estimated()
 0.6931471805599453
-&gt;&gt;&gt;
-&gt;&gt;&gt; lyapunov_estimated(&quot;Tent&quot;, 0.69, 1000, 100, dec=True)
+
+&gt;&gt;&gt; m.lyapunov_estimated(dec=True)
 Decimal('0.69314718055994530941723212145817656807550013436')
 </code></pre>
-<h3 id="lyapunov-convergence-convergencia-de-lyapunov">Lyapunov Convergence (Convergência de Lyapunov)</h3>
-<div class="func-header"> <b>lyapunov_convergence</b><span>(map_name, x0, steps, trans, prec=50, dec=False, plot=False)</span> </div>
+<hr />
+<h4 id="convergencia-de-lyapunov">Convergência de Lyapunov</h4>
+<div class="func-header">
+    <b>lyapunov_convergence</b><span>(plot=False)</span>
+</div>
 
-<p>Computa a convergência do Expoente de Lyapunov de um mapa caótico.</p>
-<p>Parâmetros: : map_name (str): Nome do mapa caótico. : x0 (float): Condição inicial. : steps (int): Número de iterações usadas na média de Lyapunov. : trans (int): Número de iterações transitórias descartadas. : prec (int): Precisão decimal. : dec (bool): Se deve retornar um objeto Decimal. : plot (bool): Se deve exibir um gráfico da convergência.</p>
-<p>Retorno: : values (array ou Decimal): Os valores de convergência do Expoente de Lyapunov.</p>
-<p>Tipo de retorno: : numpy.array ou decimal.Decimal</p>
-<h3 id="theoretical-lyapunov-lyapunov-teorico">Theoretical Lyapunov (Lyapunov Teórico)</h3>
-<div class="func-header"> <b>theoretical_lyapunov</b><span>(map_name, dec=False)</span> </div>
+<p>Calcula a convergência do Expoente de Lyapunov ao longo das iterações.</p>
+<dl>
+<dt><strong>Parâmetros:</strong></dt>
+<dd>
+<p><strong>plot</strong> (<em>bool</em>): Se <code>True</code>, exibe um gráfico da convergência (padrão: <code>False</code>).</p>
+</dd>
+<dt><strong>Retorno:</strong></dt>
+<dd>
+<p><strong>values</strong> (<em>numpy.array</em>): Array com as médias acumuladas do Expoente de Lyapunov a cada iteração.</p>
+</dd>
+</dl>
+<p><strong>Exemplos</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = LogisticMap(steps=1000, trans=1000)
+&gt;&gt;&gt; m.lyapunov_convergence()
+array([0.90973773, 0.41082964, 0.69907782, ..., 0.69323049])
 
-<p>Retorna o Expoente de Lyapunov teórico de um mapa caótico.</p>
-<p>Parâmetros: : map_name (str): Nome do mapa caótico. : dec (bool): Se deve retornar um objeto Decimal (se True) ou um float (se False, padrão).</p>
-<p>Retorno: : values (float ou Decimal): O Expoente de Lyapunov teórico do mapa caótico.</p>
-<p>Tipo de retorno: : float ou decimal.Decimal</p>
-<pre><code class="language-Python">&gt;&gt;&gt; theoretical_lyapunov(&quot;Tent&quot;)
-0.6931471805599453
+&gt;&gt;&gt; m.lyapunov_convergence(plot=True)
+# exibe gráfico
 </code></pre>
-<h3 id="lyapunov-summary-resumo-de-lyapunov">Lyapunov Summary (Resumo de Lyapunov)</h3>
-<div class="func-header"> <b>lyapunov_summary</b><span>(map_name, x0, steps, trans, prec=50, dec=False, plot=False)</span> </div>
+<hr />
+<h4 id="expoente-de-lyapunov-teorico">Expoente de Lyapunov Teórico</h4>
+<div class="func-header">
+    <b>theoretical_lyapunov</b>
+</div>
 
-<p>Parâmetros: : map_name (str): Nome do mapa caótico. : x0 (float): Condição inicial. : steps (int): Número de iterações usadas na média de Lyapunov. : trans (int): Número de iterações transitórias descartadas. : prec (int): Precisão decimal. : dec (bool): Se deve retornar um objeto Decimal. : plot (bool): Se deve exibir um gráfico de resumo.</p>
-<p>Retorno: : values (dict): Dicionário contendo o nome do mapa caótico, expoente de Lyapunov teórico, expoente de Lyapunov estimado e a série temporal do mapa.</p>
-<p>Tipo de retorno: : dict</p>
-<p>``` Python</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>lyapunov_summary("Tent", 0.69, 1000, 100)
-{'map': 'Tent map',
+<p>Propriedade que retorna o Expoente de Lyapunov analítico do mapa.</p>
+<dl>
+<dt><strong>Retorno:</strong></dt>
+<dd>
+<p><strong>values</strong> (<em>Decimal ou None</em>): O Expoente de Lyapunov teórico. Retorna <code>None</code> para mapas ou valores de parâmetros onde o valor teórico não está definido (ex.: <code>LogisticMap</code> com <code>r ≠ 4</code>).</p>
+</dd>
+</dl>
+<p><strong>Exemplos</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100)
+&gt;&gt;&gt; float(m.theoretical_lyapunov)
+0.6931471805599453
+
+&gt;&gt;&gt; m = LogisticMap(steps=1000, trans=100, r=3)
+&gt;&gt;&gt; m.theoretical_lyapunov is None
+True
+</code></pre>
+<hr />
+<h4 id="resumo-de-lyapunov">Resumo de Lyapunov</h4>
+<div class="func-header">
+    <b>lyapunov_summary</b><span>(dec=False)</span>
+</div>
+
+<p>Gera um resumo completo do mapa, incluindo os Expoentes de Lyapunov estimado e teórico, erro relativo e a série temporal completa.</p>
+<dl>
+<dt><strong>Parâmetros:</strong></dt>
+<dd>
+<p><strong>dec</strong> (<em>bool</em>): Se <code>True</code>, retorna valores <code>Decimal</code> de alta precisão em todos os campos numéricos (padrão: <code>False</code>).</p>
+</dd>
+<dt><strong>Retorno:</strong></dt>
+<dd>
+<p><strong>values</strong> (<em>dict</em>): Dicionário com as seguintes chaves:</p>
+</dd>
+</dl>
+<table>
+<thead>
+<tr>
+<th>Chave</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map</code></td>
+<td>str</td>
+<td>Nome da classe do mapa</td>
+</tr>
+<tr>
+<td><code>theoretical</code></td>
+<td>float ou Decimal</td>
+<td>Expoente de Lyapunov teórico</td>
+</tr>
+<tr>
+<td><code>estimated</code></td>
+<td>float ou Decimal</td>
+<td>Expoente de Lyapunov estimado</td>
+</tr>
+<tr>
+<td><code>error_percent</code></td>
+<td>str</td>
+<td>Erro relativo entre estimado e teórico (string formatada)</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td>int</td>
+<td>Número de iterações utilizadas</td>
+</tr>
+<tr>
+<td><code>transient</code></td>
+<td>int</td>
+<td>Número de iterações transientes descartadas</td>
+</tr>
+<tr>
+<td><code>x0</code></td>
+<td>float ou Decimal</td>
+<td>Condição inicial utilizada</td>
+</tr>
+<tr>
+<td><code>time_series</code></td>
+<td>numpy.array ou list</td>
+<td>Órbita do mapa após o transiente</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplos</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100, x0=0.69)
+&gt;&gt;&gt; m.lyapunov_summary()
+{'map': 'TentMap',
  'theoretical': 0.6931471805599453,
  'estimated': 0.6931471805599453,
- 'time_series': array([0.88, 0.24, 0.48, 0.96, 0.08, 0.16, 0.32,..., 0.72, 0.56])}
- ```</p>
-</blockquote>
-</blockquote>
-</blockquote>
+ 'error_percent': '0.0000%',
+ 'steps': 1000,
+ 'transient': 100,
+ 'x0': 0.69,
+ 'time_series': array([0.88, 0.24, 0.48, ...])}
+</code></pre>
+<hr />
 <h2 id="lista-de-mapas">Lista de Mapas</h2>
-<p>Na teoria do caos, mapas (também conhecidos como mapas iterados, equações de diferenças ou relações de recorrência) são sistemas dinâmicos nos quais o tempo é discreto em vez de contínuo. A simulação de mapas discretos é fundamental, pois estes servem como ambientes controlados para o estudo de sistemas caóticos, permitindo a observação de fenômenos complexos através da evolução de órbitas discretas em vez de fluxos contínuos.</p>
-<p>Os seguintes mapas podem ser simulados com este pacote:</p>
-<h3 id="mapa-logistico-logistic-map">Mapa Logístico (Logistic Map)</h3>
-<p>String de entrada: "Logistic"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = rx_n(1 - x_n)\)</span></p>
-<h3 id="mapa-de-ulam-ulam-map">Mapa de Ulam (Ulam Map)</h3>
-<p>String de entrada: "Ulam"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = 1 - 2x_n^2\)</span></p>
-<h3 id="mapa-tenda-tent-map">Mapa Tenda (Tent Map)</h3>
-<p>String de entrada: "Tent"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = \begin{cases} \mu x_n &amp; \text{se } x_n &lt; \frac{1}{2} \\ \mu (1 - x_n) &amp; \text{se } x_n \geq \frac{1}{2} \end{cases}\)</span></p>
-<h3 id="mapa-de-gauss-gauss-map">Mapa de Gauss (Gauss Map)</h3>
-<p>String de entrada: "Gauss"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = \frac{1}{x_n} - \lfloor \frac{1}{x_n} \rfloor\)</span></p>
-<h3 id="mapa-de-bernoulli-bernoulli-map">Mapa de Bernoulli (Bernoulli Map)</h3>
-<p>String de entrada: "Bernoulli"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = 2x_n \pmod 1\)</span></p>
-<h3 id="mapa-tenda-assimetrico-asymmetric-tent-map">Mapa Tenda Assimétrico (Asymmetric Tent Map)</h3>
-<p>String de entrada: "Asymmetric Tent"</p>
-<h3 id="mapa-de-chebyshev-chebyshev-map">Mapa de Chebyshev (Chebyshev Map)</h3>
-<p>String de entrada: "Chebyshev"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = \cos(k \arccos(x_n))\)</span></p>
-<h3 id="mapa-de-cuspide-cusp-map">Mapa de Cúspide (Cusp Map)</h3>
-<p>String de entrada: "Cusp"</p>
-<p>Equação: <span class="arithmatex">\(x_{n+1} = 1 - \sqrt{|1 - 2x_n|}\)</span></p>
-<h2 id="referencias">Referencias</h2>
-<p>[^1]: [^1]: STROGATZ, Steven H. <strong>Nonlinear Dynamics and Chaos</strong>: With Applications to Physics, Biology, Chemistry, and Engineering. 2. ed. [S.l.]: CRC Press, 2014.</p>
+<p>Na teoria do caos, mapas (também conhecidos como mapas iterados, equações de diferenças ou relações de recorrência) são sistemas dinâmicos nos quais o tempo é discreto em vez de contínuo.[^1] A simulação de mapas discretos é fundamental, pois eles servem como ambientes controlados para o estudo de sistemas caóticos, permitindo a observação de fenômenos complexos por meio da evolução de órbitas discretas em vez de fluxos contínuos.[^1]</p>
+<p>Para ver os mapas disponíveis, utilize <code>lyapy.available_maps()</code>.</p>
+<hr />
+<h3 id="mapa-logistico">Mapa Logístico</h3>
+<p><strong>Classe:</strong> <code>LogisticMap(steps, trans, r=4, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = rx_n(1 - x_n)\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span> <em>(definido apenas para <span class="arithmatex">\(r = 4\)</span>)</em></p>
+<hr />
+<h3 id="mapa-de-ulam">Mapa de Ulam</h3>
+<p><strong>Classe:</strong> <code>UlamMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = 1 - 2x_n^2\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<hr />
+<h3 id="mapa-de-gauss">Mapa de Gauss</h3>
+<p><strong>Classe:</strong> <code>GaussMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = \frac{1}{x_n} \pmod 1\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \dfrac{\pi^2}{6\ln(2)}\)</span></p>
+<hr />
+<h3 id="mapa-de-bernoulli">Mapa de Bernoulli</h3>
+<p><strong>Classe:</strong> <code>BernoulliMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = 2x_n \pmod 1\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<hr />
+<h3 id="mapa-tenda">Mapa Tenda</h3>
+<p><strong>Classe:</strong> <code>TentMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = 2\min(x_n,\, 1 - x_n)\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<hr />
+<h3 id="mapa-tenda-assimetrico">Mapa Tenda Assimétrico</h3>
+<p><strong>Classe:</strong> <code>AsymetricMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong></p>
+<div class="arithmatex">\[x_{n+1} = \begin{cases} x_n / a &amp; \text{se } x_n &lt; a \\ (1 - x_n)/(1 - a) &amp; \text{caso contrário} \end{cases}\]</div>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = -a\ln(a) - (1-a)\ln(1-a)\)</span></p>
+<p><em>(Padrão <span class="arithmatex">\(a = 0.4\)</span>)</em></p>
+<hr />
+<h3 id="mapa-de-chebyshev">Mapa de Chebyshev</h3>
+<p><strong>Classe:</strong> <code>ChebyshevMap(steps, trans, k=2, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = T_k(x_n)\)</span>, onde <span class="arithmatex">\(T_k\)</span> é o polinômio de Chebyshev de grau <span class="arithmatex">\(k\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \ln(k)\)</span></p>
+<p><em>(Padrão <span class="arithmatex">\(k = 2\)</span>)</em></p>
+<hr />
+<h3 id="mapa-de-bernoulli-generalizado">Mapa de Bernoulli Generalizado</h3>
+<p><strong>Classe:</strong> <code>GeneralizedBernoulliMap(steps, trans, m=2, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equação:</strong> <span class="arithmatex">\(x_{n+1} = mx_n \pmod 1\)</span></p>
+<p><strong>Expoente de Lyapunov Teórico:</strong> <span class="arithmatex">\(\lambda = \ln(m)\)</span></p>
+<p><em>(Padrão <span class="arithmatex">\(m = 2\)</span>, que recupera o Mapa de Bernoulli padrão)</em></p>
+<hr />
+<h2 id="referencias">Referências</h2>
+<p>[^1]: STROGATZ, Steven H. <strong>Dinâmica Não-Linear e Caos</strong>: Com Aplicações em Física, Biologia, Química e Engenharia. 2. ed. CRC Press, 2014.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Lyappy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href=".." class="btn btn-neutral float-left" title="Lyapy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
