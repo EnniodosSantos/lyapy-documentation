@@ -48,13 +48,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#list-of-methods">List of Methods</a>
+    <li class="toctree-l2"><a class="reference internal" href="#class-initialization">Class Initialization</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#chaoticmap-initialization">ChaoticMap Initialization</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#inicial-condition-generator">Inicial Condition Generator</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#map-evolution">Map Evolution</a>
+    <li class="toctree-l3"><a class="reference internal" href="#time-series">Time Series</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#lyapunov-estimated">Lyapunov Estimated</a>
     </li>
@@ -81,6 +79,8 @@
     <li class="toctree-l3"><a class="reference internal" href="#asymmetric-tent-map">Asymmetric Tent Map</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#chebyshev-map">Chebyshev Map</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generalized-bernoulli-map">Generalized Bernoulli Map</a>
     </li>
         </ul>
     </li>
@@ -116,15 +116,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="about-lyappy">About Lyappy</h1>
-<p><code>lyappy</code> is a pure Python library for the generation and analysis of synthetic chaotic time series derived from discrete dynamical systems with exact Lyapunov exponents and analytically known invariant measures.</p>
+                <h1 id="about-lyapy">About Lyapy</h1>
+<p><code>lyapy</code> is a pure Python library for the generation and analysis of synthetic chaotic time series derived from discrete dynamical systems with exact Lyapunov exponents and analytically known invariant measures.</p>
 <h2 id="installing">Installing</h2>
-<p>Lyappy can be installed via the command line using:</p>
-<ul>
-<li><code>pip install lyappy</code></li>
-</ul>
+<p>Lyapy can be installed via the command line using:</p>
+<pre><code>pip install lyapy
+</code></pre>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre><code class="language-python">from lyappy import LogisticMap
+<pre><code class="language-python">from lyapy import LogisticMap
 
 # Initialize the map with steps and transient
 map_obj = LogisticMap(steps=1000, trans=100)
@@ -136,15 +135,13 @@ print(f&quot;Estimated Lambda: {summary['estimated']}&quot;)
 # Generate plots
 map_obj.time_series(plot=True)
 map_obj.lyapunov_convergence(plot=True)
-
 </code></pre>
-<h2 id="list-of-methods">List of Methods</h2>
-<h4 id="chaoticmap-initialization">ChaoticMap Initialization</h4>
+<h2 id="class-initialization">Class Initialization</h2>
 <div class="func-header">
     <b>ChaoticMap</b><span>(steps, trans, x0=None, prec=50, seed=None)</span>
 </div>
 
-<p>Base class constructor for all chaotic maps.</p>
+<p>Base class constructor for all chaotic maps. All map classes inherit from <code>ChaoticMap</code> and share this interface.</p>
 <dl>
 <dt><strong>Parameters:</strong></dt>
 <dd>
@@ -154,15 +151,24 @@ map_obj.lyapunov_convergence(plot=True)
 <p><strong>trans</strong> (int): Number of transient iterations to be discarded.</p>
 </dd>
 <dd>
-<p><strong>x0</strong> (float/Decimal, optional): Initial condition. If None, it is sampled from the map's domain.</p>
+<p><strong>x0</strong> (float/Decimal, optional): Initial condition. If <code>None</code>, it is sampled randomly from the map's domain.</p>
 </dd>
 <dd>
-<p><strong>prec</strong> (int): Decimal precision for calculations (default: 50).</p>
+<p><strong>prec</strong> (int): Decimal precision for calculations (default: <code>50</code>).</p>
 </dd>
 <dd>
 <p><strong>seed</strong> (int, optional): Seed for the random number generator.</p>
 </dd>
 </dl>
+<p><strong>Examples</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; from lyapy import LogisticMap, TentMap
+&gt;&gt;&gt; m = LogisticMap(steps=1000, trans=100)
+&gt;&gt;&gt; m
+&lt;LogisticMap: x0=0.6931, steps=1000, trans=100&gt;
+
+&gt;&gt;&gt; m = TentMap(steps=500, trans=50, x0=0.69, seed=42)
+</code></pre>
+<hr />
 <div class="func-header">
     <b>available_maps</b><span>()</span>
 </div>
@@ -173,221 +179,255 @@ map_obj.lyapunov_convergence(plot=True)
 <dd>
 <p><strong>values</strong> (<em>list of str</em>): Names of the available chaotic maps.</p>
 </dd>
-<dt><strong>Return type:</strong></dt>
-<dd>
-<p>list</p>
-</dd>
 </dl>
 <p><strong>Examples</strong></p>
-<pre><code class="language-python">&gt;&gt;&gt; available_maps()
+<pre><code class="language-python">&gt;&gt;&gt; import lyapy
+&gt;&gt;&gt; lyapy.available_maps()
 ['Gauss',
  'Logistic',
  'Bernoulli',
  'Ulam',
  'Tent',
  'Asymmetric Tent',
- 'Chebyshev']
-&gt;&gt;&gt;
+ 'Chebyshev',
+ 'Generalized Bernoulli']
 </code></pre>
-<h4 id="inicial-condition-generator">Inicial Condition Generator</h4>
+<hr />
+<h2 id="methods">Methods</h2>
+<h4 id="time-series">Time Series</h4>
 <div class="func-header">
-    <b>initial_condition</b><span>(map_name)</span>
+    <b>time_series</b><span>(dec=False, plot=False)</span>
 </div>
 
-<p>Return a random initial condition within the domain of the selected chaotic map.</p>
+<p>Computes the evolution of the chaotic map after discarding the transient.</p>
 <dl>
 <dt><strong>Parameters:</strong></dt>
 <dd>
-<p><strong>map_name</strong> (<em>str</em>): Name of the chaotic map.</p>
+<p><strong>dec</strong> (<em>bool</em>): Whether to return a list of <code>Decimal</code> objects (if <code>True</code>) or a <code>numpy.array</code> (if <code>False</code>, default).</p>
+</dd>
+<dd>
+<p><strong>plot</strong> (<em>bool</em>): Whether to show a plot of the time series (default: <code>False</code>).</p>
 </dd>
 <dt><strong>Returns:</strong></dt>
 <dd>
-<p><strong>value</strong> (<em>float</em>): A random initial condition sampled from the map domain.</p>
-</dd>
-<dt><strong>Return type:</strong></dt>
-<dd>
-<p>float</p>
+<p><strong>values</strong> (<em>numpy.array or list of Decimal</em>): Time series of the chaotic map evolution.</p>
 </dd>
 </dl>
 <p><strong>Examples</strong></p>
-<pre><code class="language-python">&gt;&gt;&gt; initial_condition(&quot;Tent&quot;)
-0.3416435874184909
-&gt;&gt;&gt;
-</code></pre>
-<h4 id="map-evolution">Map Evolution</h4>
-<div class="func-header">
-    <b>map_time_series</b><span>(map_name, x0, steps, trans, prec=50, dec=False, plot=False)</span>
-</div>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100)
+&gt;&gt;&gt; m.time_series()
+array([0.88, 0.24, 0.48, 0.96, ..., 0.64, 0.72, 0.56])
 
-<p>Computes the evolution of a chaotic map.</p>
-<dl>
-<dt><strong>Parameters:</strong></dt>
-<dd>
-<p><strong>map_name</strong> (<em>str</em>): Name of the chaotic map.</p>
-</dd>
-<dd>
-<p><strong>x0</strong> (<em>float</em>): Initial condition for the iterations.</p>
-</dd>
-<dd>
-<p><strong>steps</strong> (<em>int</em>): Number of iterations used to compute the map evolution.</p>
-</dd>
-<dd>
-<p><strong>trans</strong> (<em>int</em>): Number of transient iterations to be discarded.</p>
-</dd>
-<dd>
-<p><strong>prec</strong> (<em>int</em>): Decimal precision (default: 50).</p>
-</dd>
-<dd>
-<p><strong>dec</strong> (<em>bool</em>): Whether to return a <code>Decimal</code> object (if <code>True</code>) or a <code>np.array</code> (if <code>False</code>, default).</p>
-</dd>
-<dd>
-<p><strong>plot</strong> (<em>bool</em>): Whether to show a plot of the convergence evolution (default: <code>False</code>).</p>
-</dd>
-<dt><strong>Returns:</strong></dt>
-<dd><strong>values</strong> (<em>array or Decimal</em>): Time series containing the evolution of the chaotic map.</dd>
-<dt><strong>Return type:</strong></dt>
-<dd>numpy.array or decimal.Decimal</dd>
-</dl>
-<p><strong>Examples</strong></p>
-<pre><code class="language-python">&gt;&gt;&gt; map_time_serie(&quot;Logistic&quot;, 0.69, 1000, 100)
-array([9.66107169e-01, 1.30976429e-01, 4.55286417e-01,...,2.03055676e-01])
-&gt;&gt;&gt;
-&gt;&gt;&gt; map_time_serie(&quot;Ulam&quot;, 0.69, 1000, 100, dec=True)
-[Decimal('-0.6870338025456384356961511819355663023943768799766'),Decimal('0.05596910831936139542992034181417084026349458638572'),...,Decimal('0.11798100275668302052603852642095837137197711931708')]
-&gt;&gt;&gt;
-&gt;&gt;&gt; map_time_serie(&quot;Tent&quot;, 0.69, 1000, 100, plot=True)
-output plot
+&gt;&gt;&gt; m.time_series(dec=True)
+[Decimal('0.88'), Decimal('0.24'), ...]
+
+&gt;&gt;&gt; m.time_series(plot=True)
+# output plot
 array([0.88, 0.24, 0.48, 0.96, ... , 0.64, 0.72, 0.56])
 </code></pre>
-<p><img alt="&quot;Example of output plot&quot;" src="download%20%283%29.png" />]</p>
+<hr />
 <h4 id="lyapunov-estimated">Lyapunov Estimated</h4>
 <div class="func-header">
     <b>lyapunov_estimated</b><span>(dec=False)</span>
 </div>
 
-<p>Computes the estimated Lyapunov Exponent of a chaotic map.</p>
+<p>Computes the estimated Lyapunov Exponent of the chaotic map.</p>
 <dl>
 <dt><strong>Parameters:</strong></dt>
-<dd><strong>map_name</strong> (<em>str</em>): Name of the chaotic map.</dd>
-<dd><strong>x0</strong> (<em>float</em>): Initial condition.</dd>
-<dd><strong>steps</strong> (<em>int</em>): Number of iterations used in the Lyapunov average.</dd>
-<dd><strong>trans</strong> (<em>int</em>): Number of transient iterations discarded.</dd>
-<dd><strong>prec</strong> (<em>int</em>): Decimal precision.</dd>
-<dd><strong>dec</strong> (<em>bool</em>): Whether to return a <code>Decimal</code> object (if <code>True</code>) or a <code>float</code> (if <code>False</code>, default).</dd>
+<dd>
+<p><strong>dec</strong> (<em>bool</em>): Whether to return a <code>Decimal</code> object (if <code>True</code>) or a <code>float</code> (if <code>False</code>, default).</p>
+</dd>
 <dt><strong>Returns:</strong></dt>
-<dd><strong>values</strong> (<em>float or Decimal</em>): The estimated Lyapunov Exponent of the chaotic map.</dd>
-<dt><strong>Return type:</strong></dt>
-<dd>float or decimal.Decimal</dd>
+<dd>
+<p><strong>values</strong> (<em>float or Decimal</em>): The estimated Lyapunov Exponent.</p>
+</dd>
 </dl>
 <p><strong>Examples</strong></p>
-<pre><code class="language-python">&gt;&gt;&gt;lyapunov_estimated(&quot;Tent&quot;, 0.69, 1000, 100)
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100, x0=0.69)
+&gt;&gt;&gt; m.lyapunov_estimated()
 0.6931471805599453
-&gt;&gt;&gt;
-&gt;&gt;&gt;lyapunov_estimated(&quot;Tent&quot;, 0.69, 1000, 100, dec=True)
-Decimal('0.69314718055994530941723212145817656807550013436')
 
+&gt;&gt;&gt; m.lyapunov_estimated(dec=True)
+Decimal('0.69314718055994530941723212145817656807550013436')
 </code></pre>
+<hr />
 <h4 id="lyapunov-convergence">Lyapunov Convergence</h4>
 <div class="func-header">
-    <b>lyapunov_convergence</b><span>(map_name, x0, steps, trans, prec=50, dec=False, plot=False)</span>
+    <b>lyapunov_convergence</b><span>(plot=False)</span>
 </div>
 
-<p>Computes the convergence of the Lyapunov Exponent of a chaotic map.</p>
+<p>Computes the convergence of the Lyapunov Exponent over iterations.</p>
 <dl>
 <dt><strong>Parameters:</strong></dt>
-<dd><strong>map_name</strong> (<em>str</em>): Name of the chaotic map.</dd>
-<dd><strong>x0</strong> (<em>float</em>): Initial condition.</dd>
-<dd><strong>steps</strong> (<em>int</em>): Number of iterations used in the Lyapunov average.</dd>
-<dd><strong>trans</strong> (<em>int</em>): Number of transient iterations discarded.</dd>
-<dd><strong>prec</strong> (<em>int</em>): Decimal precision.</dd>
-<dd><strong>dec</strong> (<em>bool</em>): Whether to return a <code>Decimal</code> object.</dd>
-<dd><strong>plot</strong> (<em>bool</em>): Whether to show a plot of the convergence.</dd>
+<dd>
+<p><strong>plot</strong> (<em>bool</em>): Whether to show a plot of the convergence (default: <code>False</code>).</p>
+</dd>
 <dt><strong>Returns:</strong></dt>
-<dd><strong>values</strong> (<em>array or Decimal</em>): The convergence values of the Lyapunov Exponent.</dd>
-<dt><strong>Return type:</strong></dt>
-<dd>numpy.array or decimal.Decimal</dd>
+<dd>
+<p><strong>values</strong> (<em>numpy.array</em>): Array of running Lyapunov Exponent averages at each iteration step.</p>
+</dd>
 </dl>
-<pre><code class="language-python">&gt;&gt;&gt;x0 = initial_condition(&quot;Logistic&quot;)
-&gt;&gt;&gt;lyapunov_convergence(&quot;Logistic&quot;, x0, 1000, 1000, plot=True)
-array([0.90973773, 0.41082964, 0.69907782, 0.74430939..., 0.69323049])
+<p><strong>Examples</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = LogisticMap(steps=1000, trans=1000)
+&gt;&gt;&gt; m.lyapunov_convergence()
+array([0.90973773, 0.41082964, 0.69907782, ..., 0.69323049])
+
+&gt;&gt;&gt; m.lyapunov_convergence(plot=True)
+# output plot
 </code></pre>
-<p><img alt="&quot;Example of output plot&quot;" src="download%20%284%29.png" />]</p>
+<hr />
 <h4 id="theoretical-lyapunov">Theoretical Lyapunov</h4>
 <div class="func-header">
-    <b>theoretical_lyapunov</b><span>(map_name, dec=False)</span>
+    <b>theoretical_lyapunov</b>
 </div>
 
-<p>Computes the theoretical Lyapunov Exponent of a chaotic map.</p>
+<p>Property that returns the analytical Lyapunov Exponent of the map.</p>
 <dl>
-<dt><strong>Parameters:</strong></dt>
-<dd><strong>map_name</strong> (<em>str</em>): Name of the chaotic map.</dd>
-<dd><strong>dec</strong> (<em>bool</em>): Whether to return a <code>Decimal</code> object (if <code>True</code>) or a <code>float</code> (if <code>False</code>, default).</dd>
 <dt><strong>Returns:</strong></dt>
-<dd><strong>values</strong> (<em>float or Decimal</em>): The theoretical Lyapunov Exponent of the chaotic map.</dd>
-<dt><strong>Return type:</strong></dt>
-<dd>float or decimal.Decimal</dd>
+<dd>
+<p><strong>values</strong> (<em>Decimal or None</em>): The theoretical Lyapunov Exponent. Returns <code>None</code> for maps or parameter values where the theoretical value is undefined (e.g., <code>LogisticMap</code> with <code>r ≠ 4</code>).</p>
+</dd>
 </dl>
-<pre><code class="language-python">&gt;&gt;&gt;theoretical_lyapunov(&quot;Tent&quot;)
+<p><strong>Examples</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100)
+&gt;&gt;&gt; float(m.theoretical_lyapunov)
 0.6931471805599453
+
+&gt;&gt;&gt; m = LogisticMap(steps=1000, trans=100, r=3)
+&gt;&gt;&gt; m.theoretical_lyapunov is None
+True
 </code></pre>
+<hr />
 <h4 id="lyapunov-summary">Lyapunov Summary</h4>
 <div class="func-header">
-    <b>lyapunov_summary</b><span>(map_name, x0, steps, trans, prec=50, dec=False, plot=False)</span>
+    <b>lyapunov_summary</b><span>(dec=False)</span>
 </div>
 
+<p>Generates a complete summary of the map, including the estimated and theoretical Lyapunov Exponents, relative error, and the full time series.</p>
 <dl>
 <dt><strong>Parameters:</strong></dt>
-<dd><strong>map_name</strong> (<em>str</em>): Name of the chaotic map.</dd>
-<dd><strong>x0</strong> (<em>float</em>): Initial condition.</dd>
-<dd><strong>steps</strong> (<em>int</em>): Number of iterations used in the Lyapunov average.</dd>
-<dd><strong>trans</strong> (<em>int</em>): Number of transient iterations discarded.</dd>
-<dd><strong>prec</strong> (<em>int</em>): Decimal precision.</dd>
-<dd><strong>dec</strong> (<em>bool</em>): Whether to return a <code>Decimal</code> object.</dd>
-<dd><strong>plot</strong> (<em>bool</em>): Whether to show a summary plot.</dd>
+<dd>
+<p><strong>dec</strong> (<em>bool</em>): Whether to return high-precision <code>Decimal</code> values for all numeric fields (default: <code>False</code>).</p>
+</dd>
 <dt><strong>Returns:</strong></dt>
-<dd><strong>values</strong> (<em>dict</em>): Dictionary containing the chaotic map's name, theoretical Lyapunov Exponent, estimated Lyapunov Exponent, and the map's time series.</dd>
-<dt><strong>Return type:</strong></dt>
-<dd>dict</dd>
+<dd>
+<p><strong>values</strong> (<em>dict</em>): Dictionary with the following keys:</p>
+</dd>
 </dl>
-<pre><code class="language-python">&gt;&gt;&gt;lyapunov_summary(&quot;Tent&quot;, 0.69, 1000, 100)
-{'map': 'Tent map',
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>map</code></td>
+<td>str</td>
+<td>Class name of the map</td>
+</tr>
+<tr>
+<td><code>theoretical</code></td>
+<td>float or Decimal</td>
+<td>Theoretical Lyapunov Exponent</td>
+</tr>
+<tr>
+<td><code>estimated</code></td>
+<td>float or Decimal</td>
+<td>Estimated Lyapunov Exponent</td>
+</tr>
+<tr>
+<td><code>error_percent</code></td>
+<td>str</td>
+<td>Relative error between estimated and theoretical (formatted string)</td>
+</tr>
+<tr>
+<td><code>steps</code></td>
+<td>int</td>
+<td>Number of iterations used</td>
+</tr>
+<tr>
+<td><code>transient</code></td>
+<td>int</td>
+<td>Number of transient iterations discarded</td>
+</tr>
+<tr>
+<td><code>x0</code></td>
+<td>float or Decimal</td>
+<td>Initial condition used</td>
+</tr>
+<tr>
+<td><code>time_series</code></td>
+<td>numpy.array or list</td>
+<td>Map orbit after transient</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<pre><code class="language-python">&gt;&gt;&gt; m = TentMap(steps=1000, trans=100, x0=0.69)
+&gt;&gt;&gt; m.lyapunov_summary()
+{'map': 'TentMap',
  'theoretical': 0.6931471805599453,
  'estimated': 0.6931471805599453,
- 'time_serie': array([0.88, 0.24, 0.48, 0.96, 0.08, 0.16, 0.32,..., 0.72, 0.56])}
+ 'error_percent': '0.0000%',
+ 'steps': 1000,
+ 'transient': 100,
+ 'x0': 0.69,
+ 'time_series': array([0.88, 0.24, 0.48, ...])}
 </code></pre>
+<hr />
 <h2 id="list-of-maps">List of Maps</h2>
-<p>In chaos theory, maps (also known as iterated maps, difference equations, or recursion relations) are dynamical systems in which time is discrete rather than continuous. [^1] The simulation of discrete maps is fundamental, as they serve as controlled environments for the study of chaotic systems, allowing the observation of complex phenomena through the evolution of discrete orbits rather than continuous flows.[^1]</p>
-<p>To see the avaliable maps you can use the <code>lyappy.available_maps()</code> method</p>
-<p>The following maps can be simulated with this package:</p>
+<p>In chaos theory, maps (also known as iterated maps, difference equations, or recursion relations) are dynamical systems in which time is discrete rather than continuous.[^1] The simulation of discrete maps is fundamental, as they serve as controlled environments for the study of chaotic systems, allowing the observation of complex phenomena through the evolution of discrete orbits rather than continuous flows.[^1]</p>
+<p>To see the available maps use <code>lyapy.available_maps()</code>.</p>
+<hr />
 <h3 id="logistic-map">Logistic Map</h3>
-<p>Class: <code>LogisticMap</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = 4x_n(1 - x_n)\)</span></p>
-<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<p><strong>Class:</strong> <code>LogisticMap(steps, trans, r=4, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = rx_n(1 - x_n)\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span> <em>(only defined for <span class="arithmatex">\(r = 4\)</span>)</em></p>
+<hr />
 <h3 id="ulam-map">Ulam Map</h3>
-<p>Class: <code>UlamMap</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = 1 - 2x_n^2\)</span></p>
-<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<p><strong>Class:</strong> <code>UlamMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = 1 - 2x_n^2\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<hr />
 <h3 id="gauss-map">Gauss Map</h3>
-<p>Class: <code>GaussMap</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = \frac{1}{x_n} \pmod 1\)</span></p>
-<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \frac{\pi^2}{6 \ln(2)}\)</span></p>
+<p><strong>Class:</strong> <code>GaussMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = \frac{1}{x_n} \pmod 1\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \dfrac{\pi^2}{6\ln(2)}\)</span></p>
+<hr />
 <h3 id="bernoulli-map">Bernoulli Map</h3>
-<p>Class: <code>BernoulliMap</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = 2x_n \pmod 1\)</span></p>
-<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<p><strong>Class:</strong> <code>BernoulliMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = 2x_n \pmod 1\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<hr />
 <h3 id="tent-map">Tent Map</h3>
-<p>Class: <code>TentMap</code></p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = 2 \min(x_n, 1 - x_n)\)</span></p>
-<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<p><strong>Class:</strong> <code>TentMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = 2\min(x_n,\, 1 - x_n)\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<hr />
 <h3 id="asymmetric-tent-map">Asymmetric Tent Map</h3>
-<p>Class: AsymetricMap</p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = x/a\)</span> if <span class="arithmatex">\(x &lt; a\)</span> else <span class="arithmatex">\((1-x)/(1-a)\)</span></p>
+<p><strong>Class:</strong> <code>AsymetricMap(steps, trans, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong></p>
+<div class="arithmatex">\[x_{n+1} = \begin{cases} x_n / a &amp; \text{if } x_n &lt; a \\ (1 - x_n)/(1 - a) &amp; \text{otherwise} \end{cases}\]</div>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = -a\ln(a) - (1-a)\ln(1-a)\)</span></p>
+<p><em>(Default <span class="arithmatex">\(a = 0.4\)</span>)</em></p>
+<hr />
 <h3 id="chebyshev-map">Chebyshev Map</h3>
-<p>Class: ChebyshevMap</p>
-<p>Equation: <span class="arithmatex">\(x_{n+1} = 2x_n^2 - 1\)</span></p>
-<p>Theoretical Lyapunov Exponent: <span class="arithmatex">\(\lambda = \ln(2)\)</span></p>
+<p><strong>Class:</strong> <code>ChebyshevMap(steps, trans, k=2, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = T_k(x_n)\)</span>, where <span class="arithmatex">\(T_k\)</span> is the Chebyshev polynomial of degree <span class="arithmatex">\(k\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \ln(k)\)</span></p>
+<p><em>(Default <span class="arithmatex">\(k = 2\)</span>)</em></p>
+<hr />
+<h3 id="generalized-bernoulli-map">Generalized Bernoulli Map</h3>
+<p><strong>Class:</strong> <code>GeneralizedBernoulliMap(steps, trans, m=2, x0=None, prec=50, seed=None)</code></p>
+<p><strong>Equation:</strong> <span class="arithmatex">\(x_{n+1} = mx_n \pmod 1\)</span></p>
+<p><strong>Theoretical Lyapunov Exponent:</strong> <span class="arithmatex">\(\lambda = \ln(m)\)</span></p>
+<p><em>(Default <span class="arithmatex">\(m = 2\)</span>, which recovers the standard Bernoulli Map)</em></p>
+<hr />
 <h2 id="references">References</h2>
-<p>[^1]: [^1]: STROGATZ, Steven H. <strong>Nonlinear Dynamics and Chaos</strong>: With Applications to Physics, Biology, Chemistry, and Engineering. 2. ed. [S.l.]: CRC Press, 2014.</p>
+<p>[^1]: STROGATZ, Steven H. <strong>Nonlinear Dynamics and Chaos</strong>: With Applications to Physics, Biology, Chemistry, and Engineering. 2. ed. CRC Press, 2014.</p>
               
             </div>
           </div><footer>
@@ -439,5 +479,5 @@ array([0.90973773, 0.41082964, 0.69907782, 0.74430939..., 0.69323049])
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-16 03:35:30.547392+00:00
+Build Date UTC : 2026-03-02 04:03:10.777752+00:00
 -->
